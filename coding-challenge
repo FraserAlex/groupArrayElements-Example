@@ -1,0 +1,30 @@
+var exampleArray = [ 1, 2, 3, 4, 5 ];
+var exampleGroupNo = 3;
+
+function groupArrayElements( array, groupNo ) {
+  var result = [];
+  //create a copy of the array so we can remove values from it as we go
+  var tempArray = array.map( ( x ) => x );
+  //loop for as many groups are desired
+  for( var i = 0; i < groupNo; i++ ) {
+    var newGrouping = populateNewGroup( array, groupNo, tempArray );
+    result.push( newGrouping );
+  }
+  console.log( result );
+}
+
+function populateNewGroup( array, groupNo, tempArray ) {
+  //create the new grouping
+  var newGrouping = [];
+  var sizeOfGrouping = array.length / groupNo;
+  //populate the new group
+  for( var j = 0; j < sizeOfGrouping; j++ ) {
+    if( tempArray[ j ] === undefined ) { continue; }
+    newGrouping.push( tempArray[ j ] );
+  }
+  //remove the grouping from the copy of the original array
+  tempArray.splice( 0, Math.ceil( sizeOfGrouping ) );
+  return newGrouping;
+}
+
+groupArrayElements( exampleArray, exampleGroupNo );
